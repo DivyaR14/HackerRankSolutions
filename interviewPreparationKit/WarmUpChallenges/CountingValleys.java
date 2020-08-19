@@ -6,20 +6,23 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
 
-public class SockMerchant {
-	
-    // Complete the sockMerchant function below.
-    static int sockMerchant(int n, int[] ar) {
-        Arrays.sort(ar);
-        int pair =0;
-        for(int i=0;i<n-1;i++){
-            if(ar[i]==ar[i+1]){
-                pair++;
-                ar[i]=0;
-                ar[i+1]=0;
+public class CountingValleys {
+
+    // Complete the countingValleys function below.
+    static int countingValleys(int n, String s) {
+        char[] c = s.toCharArray();
+        int value =0,level =0;
+        for(int i=0;i<n;i++){
+            if(c[i]== 'U'){
+                ++level;
+            }else{
+                --level;
+            }
+            if(level == 0 && c[i] == 'U'){
+                value++;
             }
         }
-        return pair;
+    return value;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -30,17 +33,9 @@ public class SockMerchant {
         int n = scanner.nextInt();
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-        int[] ar = new int[n];
+        String s = scanner.nextLine();
 
-        String[] arItems = scanner.nextLine().split(" ");
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-        for (int i = 0; i < n; i++) {
-            int arItem = Integer.parseInt(arItems[i]);
-            ar[i] = arItem;
-        }
-
-        int result = sockMerchant(n, ar);
+        int result = countingValleys(n, s);
 
         bufferedWriter.write(String.valueOf(result));
         bufferedWriter.newLine();

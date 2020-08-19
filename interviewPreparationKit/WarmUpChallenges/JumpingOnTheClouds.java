@@ -6,20 +6,25 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
 
-public class SockMerchant {
-	
-    // Complete the sockMerchant function below.
-    static int sockMerchant(int n, int[] ar) {
-        Arrays.sort(ar);
-        int pair =0;
-        for(int i=0;i<n-1;i++){
-            if(ar[i]==ar[i+1]){
-                pair++;
-                ar[i]=0;
-                ar[i+1]=0;
+public class JumpingOnTheClouds {
+
+    // Complete the jumpingOnClouds function below.
+    static int jumpingOnClouds(int[] c) {
+     int i=0;
+        int jump= (c.length ==2) ? 1 : 0 ;
+        while(c.length-2 > i) {
+            if(i+2 < c.length-2 ) {
+                if(c[i+2]== 0) {
+                    i=i+2;
+                }else {
+                    i++;
+                }
+            }else {
+                i++;
             }
+            jump++;    
         }
-        return pair;
+        return jump;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -30,17 +35,17 @@ public class SockMerchant {
         int n = scanner.nextInt();
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-        int[] ar = new int[n];
+        int[] c = new int[n];
 
-        String[] arItems = scanner.nextLine().split(" ");
+        String[] cItems = scanner.nextLine().split(" ");
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
         for (int i = 0; i < n; i++) {
-            int arItem = Integer.parseInt(arItems[i]);
-            ar[i] = arItem;
+            int cItem = Integer.parseInt(cItems[i]);
+            c[i] = cItem;
         }
 
-        int result = sockMerchant(n, ar);
+        int result = jumpingOnClouds(c);
 
         bufferedWriter.write(String.valueOf(result));
         bufferedWriter.newLine();
